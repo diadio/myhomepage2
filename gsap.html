@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+    
+  </head>
+  <body>
+    <div id="root"></div>
+    <div onclick="openInNewTab('https:\\www.google.com');">Something To Click On</div>
+    <div onclick="closeInNewTab('https:\\tw.yahoo.com');">Something2 To Click On</div>
+    <script>
+        
+    var mywindow;
+    function openInNewTab(url) {
+     mywindow = window.open('http:\\www.google.com', '_blank');
+    }
+    function closeInNewTab(url) {
+     mywindow.top.location.href = 'http:\\tw.yahoo.com';
+    }
+    </script>
+    <script type="text/babel">
+    
+      function MyApp() {
+        return <h1>Hello, world!</h1>;
+      }
+
+      const container = document.getElementById('root');
+      const root = ReactDOM.createRoot(container);
+      root.render(<MyApp />);
+
+    </script>
+
+
+  </body>
+</html>
