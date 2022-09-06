@@ -9,10 +9,64 @@
         <!-- Don't use this in production: -->
         <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+        <script
+            src="https://code.jquery.com/jquery-3.6.1.min.js"
+            integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+            crossorigin="anonymous">
+        </script>
+        <style>
+            /* http://meyerweb.com/eric/tools/css/reset/ 
+            v2.0 | 20110126
+            License: none (public domain)
+            */
 
+            html, body, div, span, applet, object, iframe,
+            h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+            a, abbr, acronym, address, big, cite, code,
+            del, dfn, em, img, ins, kbd, q, s, samp,
+            small, strike, strong, sub, sup, tt, var,
+            b, u, i, center,
+            dl, dt, dd, ol, ul, li,
+            fieldset, form, label, legend,
+            table, caption, tbody, tfoot, thead, tr, th, td,
+            article, aside, canvas, details, embed, 
+            figure, figcaption, footer, header, hgroup, 
+            menu, nav, output, ruby, section, summary,
+            time, mark, audio, video {
+                margin: 0;
+                padding: 0;
+                border: 0;
+                font-size: 100%;
+                font: inherit;
+                vertical-align: baseline;
+            }
+            /* HTML5 display-role reset for older browsers */
+            article, aside, details, figcaption, figure, 
+            footer, header, hgroup, menu, nav, section {
+                display: block;
+            }
+            body {
+                line-height: 1;
+            }
+            ol, ul {
+                list-style: none;
+            }
+            blockquote, q {
+                quotes: none;
+            }
+            blockquote:before, blockquote:after,
+            q:before, q:after {
+                content: '';
+                content: none;
+            }
+            table {
+                border-collapse: collapse;
+                border-spacing: 0;
+            }
+        </style>
     </head>
     <body>
-    <div id="root"></div>
+    <!-- <div id="root"></div>
     <div onclick="openInNewTab('https:\\www.google.com');">Something To Click On</div>
     <div onclick="closeInNewTab('https:\\tw.yahoo.com');">Something2 To Click On</div>
     <script>
@@ -37,9 +91,10 @@
         const root = ReactDOM.createRoot(container);
         root.render(<MyApp/>);
 
-    </script>
+    </script> -->
     <header class="container">
         <h2 class="container__headline">Wanna see something neat?</h2>
+        <h3 id="animate1" class="container__headline">Wanna see something neat?</h3>
     </header>
     <section class="container hero">
         <div class="hero__inner">
@@ -156,8 +211,24 @@
         }
     </style>
     <script>
-       
+       //WITH Timelines (cleaner, more versatile)
+        var tl = gsap.timeline({repeat: 0, repeatDelay: 1});
+        tl.to("#animate1", {x: 100, duration: 1});
+        tl.to("#animate1", {y: 100, duration: 1});
+        tl.to("#animate1", {opacity: 0, duration: 1});
 
+        // then we can control the whole thing easily...
+        tl.pause();
+        // tl.resume();
+        // tl.seek(3);
+        // tl.reverse();
+        $(window).scroll(function(){
+            if($(window).scrollTop()>1){
+                console.dir($(window).scrollTop()/100)
+                tl.seek($(window).scrollTop()/100);
+            }
+        })
+        
     </script>
     </body>
 </html>
