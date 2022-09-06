@@ -59,9 +59,44 @@
                 content: '';
                 content: none;
             }
+            .container{
+                position:relative;
+            }
             table {
                 border-collapse: collapse;
                 border-spacing: 0;
+            }
+            .item{
+                width: 15vh;
+                height: 2px;
+                background: #fff;
+                position: absolute;
+                opacity:0;
+            }
+            .item1{
+                top: 3vh;
+                left: 3vh;
+                transform: rotate(45deg);
+            }
+            .item2{
+                top: 5vh;
+                left: 7vh;
+                transform: rotate(45deg);
+            }
+            .item3{
+                top: 3vh;
+                right: 3vh;
+                transform: rotate(-45deg);
+            }
+            .item4{
+                bottom: 3vh;
+                left: 3vh;
+                transform: rotate(-45deg);
+            }
+            .item5{
+                bottom: 3vh;
+                right: 3vh;
+                transform: rotate(45deg);
             }
         </style>
     </head>
@@ -95,6 +130,11 @@
     <header class="container">
         <h2 class="container__headline">Wanna see something neat?</h2>
         <h3 id="animate1" class="container__headline">Wanna see something neat?</h3>
+        <div class="item item1"></div>
+        <div class="item item2"></div>
+        <div class="item item3"></div>
+        <div class="item item4"></div>
+        <div class="item item5"></div>
     </header>
     <section class="container hero">
         <div class="hero__inner">
@@ -216,16 +256,41 @@
         tl.to("#animate1", {x: 100, duration: 1});
         tl.to("#animate1", {y: 100, duration: 1});
         tl.to("#animate1", {opacity: 0, duration: 1});
-
+        var t = [];
+        t[0] = gsap.timeline({repeat: 0, repeatDelay: 1});
+        t[0].to(".item1", {x: '100vw',y:'100vh', opacity: 0.8, duration: 1});
+        t[1] = gsap.timeline({repeat: 0, repeatDelay: 1});
+        t[1].to(".item2", {x: '100vw',y:'100vh', opacity: 0.8, duration: 1,delay:0.5});
+        t[2] = gsap.timeline({repeat: 0, repeatDelay: 1});
+        t[2].to(".item3", {x: '-100vw',y:'100vh', opacity: 0.8, duration: 1});
+        t[3] = gsap.timeline({repeat: 0, repeatDelay: 1});
+        t[3].to(".item4", {x: '100vw',y:'-100vh', opacity: 0.8, duration: 1});
+        t[4] = gsap.timeline({repeat: 0, repeatDelay: 1});
+        t[4].to(".item5", {x: '-100vw',y:'-100vh', opacity: 0.8, duration: 1});
         // then we can control the whole thing easily...
         tl.pause();
+        t[0].pause();
+        t[1].pause();
+        t[2].pause();
+        t[3].pause();
+        t[4].pause();
+        
         // tl.resume();
         // tl.seek(3);
         // tl.reverse();
         $(window).scroll(function(){
+            window.setTimeout(function(){
+                
+            })
             if($(window).scrollTop()>1){
-                console.dir($(window).scrollTop()/100)
-                tl.seek($(window).scrollTop()/100);
+                console.dir($(window).scrollTop()/200)
+                tl.seek($(window).scrollTop()/200);
+                // t2.seek($(window).scrollTop()/200);
+                t[0].seek($(window).scrollTop()/200);
+                t.forEach(function(e){
+                    e.seek($(window).scrollTop()/200);
+                })
+                
             }
         })
         
