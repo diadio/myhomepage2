@@ -68,7 +68,7 @@
             }
             .item{
                 width: 15vh;
-                height: 2px;
+                height: 6px;
                 background: #fff;
                 position: absolute;
                 opacity:0;
@@ -257,27 +257,28 @@
         tl.to("#animate1", {y: 100, duration: 1});
         tl.to("#animate1", {opacity: 0, duration: 1});
         var t = [];
-        t[0] = gsap.timeline({repeat: 0, repeatDelay: 1});
-        t[0].to(".item1", {x: '100vw',y:'100vh', opacity: 0.8, duration: 1});
-        t[1] = gsap.timeline({repeat: 0, repeatDelay: 1});
-        t[1].to(".item2", {x: '100vw',y:'100vh', opacity: 0.8, duration: 1,delay:0.5});
+        t[0] = gsap.timeline({repeat: 1, repeatDelay: 1});
+        t[0].to(".item1", {x: '100vw',y:'100vh', opacity: 0.8, duration: 3});
+        t[1] = gsap.timeline({repeat: 1, repeatDelay: 1});
+        t[1].to(".item2", {x: '100vw',y:'100vh', opacity: 0.8, duration: 3,delay:0.5});
         t[2] = gsap.timeline({repeat: 0, repeatDelay: 1});
-        t[2].to(".item3", {x: '-100vw',y:'100vh', opacity: 0.8, duration: 1});
+        t[2].to(".item3", {x: '-100vw',y:'100vh', opacity: 0.8, duration: 3,delay:1});
         t[3] = gsap.timeline({repeat: 0, repeatDelay: 1});
-        t[3].to(".item4", {x: '100vw',y:'-100vh', opacity: 0.8, duration: 1});
+        t[3].to(".item4", {x: '100vw',y:'-100vh', opacity: 0.8, duration: 2,delay:3});
         t[4] = gsap.timeline({repeat: 0, repeatDelay: 1});
-        t[4].to(".item5", {x: '-100vw',y:'-100vh', opacity: 0.8, duration: 1});
+        t[4].to(".item5", {x: '-100vw',y:'-100vh', opacity: 0.8, duration: 3,delay:3});
+        
         // then we can control the whole thing easily...
+        // var hero = gsap.timeline({repeat: 0, repeatDelay: 1});
+        // hero.to(".hero__content", {y:'100vh', opacity: 0.8, duration: 1});
+        
         tl.pause();
         t[0].pause();
         t[1].pause();
         t[2].pause();
         t[3].pause();
         t[4].pause();
-        
-        // tl.resume();
-        // tl.seek(3);
-        // tl.reverse();
+        // hero.pause();
         $(window).scroll(function(){
             window.setTimeout(function(){
                 
@@ -289,9 +290,12 @@
                 t[0].seek($(window).scrollTop()/200);
                 t.forEach(function(e){
                     e.seek($(window).scrollTop()/200);
-                })
-                
+                })  
             }
+            // if($(window).scrollTop()>$(window).height()){
+            //     hero.seek($(window).scrollTop()/200);
+            // }
+            
         })
         
     </script>
